@@ -255,6 +255,24 @@ h2 {
   font-size: 1.62671rem;
   line-height: 1.1;
 }
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800&family=Roboto&display=swap');
+h1, h2, p {
+  font-family: 'Overpass', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+h1, h2 {
+  color: #e4d9ce;
+  margin-bottom: 0.5rem
+}
+h1 {
+  font-weight: bold;
+}
+h2 { 
+  font-weight: normal;
+}
+p {
+  color: #e3d672;
+}
 h3 {
   margin-left: 0;
   margin-right: 0;
