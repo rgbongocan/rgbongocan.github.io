@@ -2,6 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import styles from "./custom.module.css"
+import _ from "lodash";
 
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
@@ -14,26 +15,36 @@ import styles from "./custom.module.css"
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const Community = () => {
+const Community = ({svg, href}) => {
+    
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "github.svg" }) {
-        childImageSharp {
-          fluid(maxWidth: 48) {
-            ...GatsbyImageSharpFluid
+      placeholderImage: allFile {
+        edges {
+            node {
+              relativePath
+              name
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+              extension
+              publicURL
+            }
           }
-        }
-        extension
-        publicURL
       }
     }
   `)
-  const { childImageSharp, extension, publicURL } = data.placeholderImage;
+  const {childImageSharp, extension, publicURL} = _.find(data.placeholderImage.edges, edge => edge.node.relativePath === svg).node;
   if (!childImageSharp && extension === "svg") {
-    console.log(styles);
-    return <img src={publicURL} width="36" className={styles.offWhiteFilter}/>
+    return (
+      <a href={href}>
+        <img src={publicURL} width="36" className={styles.offWhiteFilter}/>
+      </a>
+    )
   }
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+  return <Img fluid={childImageSharp.fluid} />
 }
 
 export default Community
