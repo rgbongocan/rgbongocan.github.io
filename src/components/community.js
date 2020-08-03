@@ -39,7 +39,7 @@ const Community = ({img, href}) => {
   if (!childImageSharp && extension === "svg") {
     return (
       <a href={href} style={{marginRight: `0.8rem`}}>
-        <img src={publicURL} width="36" className={styles.offWhiteFilter}/>
+        <img src={publicURL} width="36" className={styles.offWhiteFilter} alt={href}/>
       </a>
     )
   }
