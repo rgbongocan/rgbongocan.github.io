@@ -15,8 +15,7 @@ import _ from "lodash";
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const Community = ({svg, href}) => {
-    
+const Community = ({img, href}) => {
   const data = useStaticQuery(graphql`
     query {
       placeholderImage: allFile {
@@ -36,10 +35,10 @@ const Community = ({svg, href}) => {
       }
     }
   `)
-  const {childImageSharp, extension, publicURL} = _.find(data.placeholderImage.edges, edge => edge.node.relativePath === svg).node;
+  const {childImageSharp, extension, publicURL} = _.find(data.placeholderImage.edges, edge => edge.node.relativePath === img).node;
   if (!childImageSharp && extension === "svg") {
     return (
-      <a href={href}>
+      <a href={href} style={{marginRight: `0.8rem`}}>
         <img src={publicURL} width="36" className={styles.offWhiteFilter}/>
       </a>
     )
